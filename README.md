@@ -1,6 +1,12 @@
 # machine_learn
 machine_learn
 
+开发环境：
+PyCharm 2018.2.3 (Professional Edition)
+Python 3.5.2
+TensorFlow
+numpy,sklearn,pandas,matlibplot...etc
+
 100天机器学习
 https://github.com/Avik-Jain/100-Days-of-ML-Code-Chinese-Version
 
