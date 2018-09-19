@@ -10,6 +10,10 @@ numpy,sklearn,pandas,matlibplot...etc
 100天机器学习
 https://github.com/Avik-Jain/100-Days-of-ML-Code-Chinese-Version
 
+《TensorFlow技术解析与实战》
+链接： https://download.csdn.net/download/valouridea/10128400
+实例代码：https://github.com/greatgeekgrace/Technical-Analysis-And-Practice-in-TensorFlow/
+
 Tensorflow 实战Google深度学习框架.pdf百度网盘下载链接
 链接： http://pan.baidu.com/s/1boRz6Zt
 实例代码：https://github.com/caicloud/tensorflow-tutorial/tree/master/Deep_Learning_with_TensorFlow/0.12.0
