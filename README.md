@@ -7,8 +7,19 @@ Python 3.5.2
 TensorFlow
 numpy,sklearn,pandas,matlibplot...etc
 
+2018/2019/校招/春招/秋招/算法/机器学习(Machine Learning)/深度学习(Deep Learning)/自然语言处理(NLP)/C/C++/Python/面试笔记
+https://github.com/imhuay/Algorithm_Interview_Notes-Chinese
+
+人工智能-机器学习笔试面试题解析
+https://github.com/geekcircle/machine-learning-interview-qa
+
 100天机器学习
 https://github.com/Avik-Jain/100-Days-of-ML-Code-Chinese-Version
+
+TensorFlow学习
+莫凡TensorFlow教程：https://morvanzhou.github.io/
+莫凡TensorFlow代码csdn归纳：https://blog.csdn.net/jiaoyangwm/article/details/79715826
+莫凡TensorFlow程序可视化：https://github.com/MorvanZhou/Tensorflow-Tutorial
 
 《TensorFlow技术解析与实战》
 链接： https://download.csdn.net/download/valouridea/10128400
@@ -17,11 +28,6 @@ https://github.com/Avik-Jain/100-Days-of-ML-Code-Chinese-Version
 Tensorflow 实战Google深度学习框架.pdf百度网盘下载链接
 链接： http://pan.baidu.com/s/1boRz6Zt
 实例代码：https://github.com/caicloud/tensorflow-tutorial/tree/master/Deep_Learning_with_TensorFlow/0.12.0
-
-TensorFlow学习
-莫凡TensorFlow教程：https://morvanzhou.github.io/
-莫凡TensorFlow代码csdn归纳：https://blog.csdn.net/jiaoyangwm/article/details/79715826
-莫凡TensorFlow程序可视化：https://github.com/MorvanZhou/Tensorflow-Tutorial
 
 机器学习
 机器学习实战csdn博客：https://blog.csdn.net/c406495762/article/details/75172850
