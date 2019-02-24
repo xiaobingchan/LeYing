@@ -1,0 +1,14 @@
+1，《weblogic运维手册》
+
+2，Oracle运维：
+https://blog.csdn.net/another_liu/article/details/79591073
+https://blog.csdn.net/mochou111/article/details/78070795
+自动备份：http://www.ttlsa.com/oracle/linux-auto-backup-oracle-database/
+导出数据：https://blog.csdn.net/arvinzr/article/details/83187226
+Oracle面试技巧：https://www.iyunv.com/thread-422533-1-1.html
+基本操作：http://blog.51cto.com/11233498/2128845
+常用运维：http://blog.51cto.com/11218855/2065851
+
+3，Windows相关命令与脚本，bat编程
+
+4，Linux相关输出，命令脚本，shell编程

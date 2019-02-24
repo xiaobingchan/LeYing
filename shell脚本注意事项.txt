@@ -1,0 +1,56 @@
+未预期的文件结尾：dos2unix 文件名
+
+执行命令：pid=`命令`
+
+获得出现某字符串的文件第几行：grep -rn '字符串'  文件名
+
+在某一行插入文件字符：sed -i "行数i插入字符串" 文件名
+
+删除文件所有的含有该字符串的行：sed -i '/字符串/d' 文件名
+
+截取符号左边的字符串：${变量名%符号*}
+
+截取符号右边的字符串：${变量名#*符号}
+
+屏蔽所有命令行输出的告警：>> /dev/null 2>&1
+
+强转字符串为数字：pid=`echo ${pid}| awk '{print int($0)}'`
+
+去掉redis告警：2>/dev/null
+
+mysql:
+# mysql -h127.0.0.1 -P3306 -uroot -p123456 -e "CREATE USER 'dog'@'%' IDENTIFIED BY '12345678990'"
+# CREATE USER 'dog'@'%' IDENTIFIED BY '12345678990';
+# mysql -h127.0.0.1 -P3306 -uroot -p123456 -e "DROP USER 'dog'@'%'"
+# DROP USER 'dog'@'%';
+# mysql -h127.0.0.1 -P3306 -uroot -p123456 -e "SET PASSWORD FOR 'dog'@'%' = PASSWORD('1234564e6456456456')"
+# SET PASSWORD FOR 'dog'@'%' = PASSWORD('1234564e6456456456');
+#https://www.cnblogs.com/clover-siyecao/p/5591992.html
+#set global validate_password_policy=LOW;
+#SHOW VARIABLES LIKE 'validate_password%';
+
+整数比较
+-eq     等于,如:if ["$a" -eq "$b" ]
+-ne     不等于,如:if ["$a" -ne "$b" ]
+-gt     大于,如:if ["$a" -gt "$b" ]
+-ge    大于等于,如:if ["$a" -ge "$b" ]
+-lt      小于,如:if ["$a" -lt "$b" ]
+-le      小于等于,如:if ["$a" -le "$b" ]
+<  小于(需要双括号),如:(("$a" < "$b"))
+<=  小于等于(需要双括号),如:(("$a" <= "$b"))
+>  大于(需要双括号),如:(("$a" > "$b"))
+>=  大于等于(需要双括号),如:(("$a" >= "$b"))
+
+$0 这个程式的执行名字
+$n 这个程式的第n个参数值，n=1..9
+$* 这个程式的所有参数,此选项参数可超过9个。
+$# 这个程式的参数个数
+$$ 这个程式的PID(脚本运行的当前进程ID号)
+$! 执行上一个背景指令的PID(后台运行的最后一个进程的进程ID号)
+$? 执行上一个指令的返回值 (显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误)
+$- 显示shell使用的当前选项，与set命令功能相同
+$@ 跟$*类似，但是可以当作数组用
+
+redis:
+#/usr/local/redis-5.0.3/src/redis-cli -h 127.0.0.1 -a a12345678 info | grep -e "connected_clients" -e "used_memory_rss_human" -e "used_memory_peak_human" -e "total_connections_received" -e "instantaneous_ops_per_sec" -e "instantaneous_input_kbps" -e "instantaneous_output_kbps" -e "rejected_connections" -e "expired_keys" -e "evicted_keys" -e "keyspace_hits" -e "keyspace_misses"
+

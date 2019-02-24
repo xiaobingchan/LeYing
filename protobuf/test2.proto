@@ -1,0 +1,12 @@
+syntax = "proto2";
+message testinfo   
+ {       
+    required int32 devtype = 1;  
+    required int32 devid = 2;  
+    required int32 unitid = 3;  
+    required int32 chlid = 4;      
+      
+    optional int32 testid = 5 [default = 0];  
+      
+    required bytes stepdata = 6;  
+ } 

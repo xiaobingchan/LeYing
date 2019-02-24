@@ -1,0 +1,61 @@
+Bat脚本实例：
+rem Time:2019.1.15
+rem Author:LuYanjie
+rem Company:NanFangDianWang
+rem File:check_win_host.bat
+rem Version:1.0
+rem Description:check linux system
+
+@echo off
+for /f "skip=2 tokens=2 delims=," %%i in ('wmic os get FreePhysicalMemory /format:CSV') do (
+set richparm2=%%i&goto e1)
+:e1
+for /f "skip=2 tokens=2 delims=," %%i in ('wmic os get TotalVisibleMemorySize /format:CSV') do (
+set richparm3=%%i&goto e2)
+:e2
+set /a richparm2=%richparm2%/1024
+set /a richparm3=%richparm3%/1024
+echo Memory Free Size:%richparm2% MB,Memory Total Size:%richparm3% MB
+
+Bat脚本查看内存使用情况
+
+sc start null
+rem 开启git
+
+wmic logicaldisk F: get FreeSpace
+rem 查看磁盘可用空间
+
+wmic logicaldisk F: get Size
+rem 查看磁盘总空间
+
+wmic cpu get LoadPercentage
+rem 查看CPU占用率
+
+wmic cpu get NumberOfCores
+rem 查看CPU核数
+
+wmic os get FreePhysicalMemory
+rem 查看可用内存
+
+wmic os get TotalVisibleMemorySize
+rem 查看总内存
+
+wmic process where name="chrome.exe" get KernelModeTime,UserModeTime
+rem 查看某一个进程占用资源情况
+
+wmic /output:a.html logicaldisk where(name='c:') get DeviceID,Size,FreeSpace,Description,FileSystem /format:htable
+rem wmic生成html网页
+
+
+WMIC开发指南
+WMIC 获取信息类型名 where 已知参数名=‘值’ get 想要获取的参数名1,参数名2
+进程管理：process
+服务管理：service
+CPU信息：cpu
+物理内存：memlogical
+硬盘：logicaldisk
+生成网页： wmic命令 /format:hform >PCinfo.html
+
+Bat屏蔽输出：命令>nul 2>nul
+
+Bat判断命令是否执行成功

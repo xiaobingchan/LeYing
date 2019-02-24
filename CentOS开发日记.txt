@@ -1,0 +1,336 @@
+#Linux运维日记：https://www.centos.bz/
+#运维派：http://www.yunweipai.com/
+#运维生存时间：http://www.ttlsa.com/
+#学习宝典：https://github.com/xingshaocheng/architect-awesome/blob/master/README.md
+#从部落到帝国：https://coderxing.gitbooks.io/architecture-evolution/
+
+#测试学习网站：http://www.51testing.com/html/index.html
+ 
+ 
+ 
+ 
+远程链接服务器：ssh luyanjie@192.168.56.1
+虚拟机文件映射：mount -t vboxsf Share_Project /home/Share_Project
+Nginx配置文件：cat /usr/local/nginx/conf/nginx.conf
+Nginx日志文件：cat /usr/local/nginx/logs/access.log
+Nginx请求转发：
+ 
+location / {
+proxy_pass http://localhost:8080/;
+}
+Nginx集群：
+ #负载均衡配置，以权重方式分发
+    upstream yii.nginx.com {
+       server 192.168.1.16:80 weight=5;
+       server 192.168.1.16:8080 weight=5;
+ }
+   #反向代理配置
+   server {
+     listen       80;
+     server_name  yii.nginx.com;
+     charset utf-8;
+     location /{
+  proxy_pass http://yii.nginx.com; }
+  }
+
+MySQL配置文件：cat /etc/my.cnf
+MySQL列出所有连接信息：mysql> show full processlist;
+Tomcat配置文件：cat /usr/local/apache-tomcat-7.0.91/conf/server.xml
+Apache配置文件：cat /etc/httpd/conf/httpd.conf
+统计行数：wc -l 文件名/wc -l
+ 
+去重：uniq
+ 
+排序：sort / sort -rn(降序)
+ 
+前5：head -数目
+ 
+查看列：awk '{print $5}'
+ 
+查看行： sed -n '2,3p'
+
+练习：统计Nginx日志
+
+ 
+查看Linux系统版本：cat /proc/version
+ 
+查看CPU核心数目：cat /proc/cpuinfo |grep -c processor
+ 
+查看定时任务：crontab -l / crontab -e
+#分 时 日 月 星期  执行的命令
+ 
+查看ip地址：ip addr
+ 
+查看进程：ps aux|grep php-fpm
+ 
+查看CPU使用情况：top
+ 
+查看进程对CPU和内存的占用情况：htop
+ 
+查看端口使用情况：netstat -apn|grep 进程名称
+ 
+查看磁盘使用情况：df -h
+ 
+查看内存使用情况：free -h
+ 
+列出防火墙规则：iptables -L -n
+ 
+列出本目录的所有文件夹：ls -d */
+ 
+添加执行权限： chmod +x a.sh
+ 
+升级rpm包：rpm -Uvh ***.rpm
+ 
+文件夹的基本码是rwxrwxrwx(777)，文件的基本码是rw-rw-rw-(666)
+#Linux 文件权限
+#例如：-rw-r--r--，第1位为是否是目录，r读=4，w写=2，x执行=1，
+#用户本身具有的权限、所属用户的用户组其他成员的权限、其他用户的权限
+ 
+创建用户组：groupadd 组别名
+ 
+添加用户至用户组：useradd -G 组别名 用户名
+
+删除用户：userdel 用户名 
+ 
+切换用户：su 用户名
+ 
+查看当前用户组别：groups
+ 
+安装rpm包：rpm -ivh ***.rpm
+ 
+忽略依赖卸载rpm包：rpm -e -nodeps ***.rpm
+ 
+查询rpm包：rpm -q ***.rpm
+ 
+升级rpm包：rpm -Uvh ***.rpm
+ 
+ 
+Shell基本语法：
+ 
+1,定义并输出一个变量：
+date=`date +%F`  
+echo ${date}
+ 
+2,登录远程ftp服务器
+open  ip地址
+user 用户名 密码
+  
+3，if判断（-eq：等于；-gt：大于；-neq：不等于；-lt：小于）
+x="10"
+y="12"
+if [ $x -eq $y ];then
+    echo "equal"
+elif [ $x -gt $y ];then
+    echo "x greater than y"
+else
+    echo "x less than y"
+fi 
+i=1
+sum=0
+while [ $i -le 100 ]
+do
+  let sum=sum+$i
+  let i++
+done
+echo $sum
+ 
+4,统计awk标题与行值
+netstat -an | awk '/^tcp/ {++state[$NF]} END {for(i in state) print i,"\t",state[i]}'
+ 
+截取一段字符
+p='www.baidu.com'
+echo ${p#www} #截取“www”右边，输出.baidu.com
+echo ${p%.baidu.com*} #截取“baidu.com”左边，输出www
+ 
+遍历txt文件
+cat a.txt | while read line
+do
+    echo ${line#.sina.com.cn} >> b.txt
+done
+ 
+ 
+ 
+开放端口：
+firewall-cmd --zone=public --add-port=端口名/tcp --permanent
+firewall-cmd --reload
+ 
+关闭防火墙：
+/etc/sysconfig/selinux #SELINUX=disabled
+ 
+
+php-fpm(9000)
+sudo /usr/local/php/sbin/php-fpm #开启php-fpm
+ps aux|grep php-fpm
+kill -INT 'cat /usr/local/php/var/run/php-fpm.pid'  #平滑停止nginx
+kill -USR2 'cat /usr/local/php/var/run/php-fpm.pid'  #平滑重启
+ 
+ 
+Nginx（80）
+开启：/usr/local/nginx/sbin/nginx
+停止：/usr/local/nginx/sbin/nginx -s stop
+重启：/usr/local/nginx/sbin/nginx -s reload
+ 
+Tomcat（8099）
+开启：/usr/local/apache-tomcat-7.0.91/bin/startup.sh
+停止：/usr/local/apache-tomcat-7.0.91/bin/shutdown.sh
+ 
+Apache（8088）
+开启：service httpd start
+停止：service httpd stop
+重启：service httpd restart
+
+MongoDB（27017）
+安装：https://blog.csdn.net/junshangshui/article/details/79371316
+错误处理：https://blog.csdn.net/liuruiqun/article/details/50953298
+后台运行：https://www.cnblogs.com/magicsky0/p/3383812.html
+./mongod --dbpath db
+./mongo
+
+MySQL（3306）
+开启：service mysqld start
+停止：service mysqld stop
+重启：service mysqld restart
+日志查询：show variables like 'log_error';
+ 
+Jekins（8080）
+开启：service jenkins start
+停止：service jenkins stop
+重启：service jenkins restart
+
+Redis（6374）
+安装：http://www.runoob.com/redis/redis-install.html
+开启：/usr/local/redis-5.0.3/src/redis-server /usr/local/redis-5.0.3/redis.conf
+将redis配置成守护进程：https://blog.csdn.net/leguan123/article/details/79770435
+命令行：/usr/local/redis-5.0.3/src/redis-cli
+daemonize yes
+哈希SET操作：HSET myhash field1 "foo"
+ 
+
+Memcached（11211）
+开启：/usr/bin/memcached  -b -l 127.0.0.1 -p 11211 -m 150 -u root
+ 
+GoAccess
+生成web报表：./goaccess /usr/local/nginx/logs/access.log -o /var/www/html/nginx_log/index.html --real-time-html --time-format='%H:%M:%S' --date-format='%d/%b/%Y' --log-format=COMBINED
+ 
+Zabixx
+开启：systemctl start zabbix-server
+停止：systemctl stop zabbix-server
+
+Postgresql
+开启：service postgresql-9.5 start
+关闭：service postgresql-9.5 stop
+初始化数据库文件夹：/usr/pgsql-9.5/bin/postgresql95-setup initdb
+安装方法：https://www.cnblogs.com/think8848/p/5877076.html
+
+Apache安装方法：yum install httpd
+php7和php7-fpm安装方法：https://www.cnblogs.com/lglblogadd/p/8269668.html
+常见PHP编译错误：https://blog.csdn.net/u011608531/article/details/50756112
+Memcache安装方法：yum install memcached
+Redis安装方法：http://www.runoob.com/redis/redis-install.html
+
+Nginx监控日志工具GoAccess安装：https://www.cnblogs.com/yjlch1016/p/9102894.html
+服务器监控软件Open-Falcon：http://blog.51cto.com/zhanx/2059434
+
+多台机器远程执行命令工具Saltstack安装：https://www.centos.bz/2017/07/centos-6-7-saltstack-install/
+
+自动化应用部署工Ansible具安装：https://www.cnblogs.com/gzxbkk/p/7515634.html
+
+服务器监控工具架：Zabbix
+导入Zabbix数据库：https://blog.csdn.net/purplegalaxy/article/details/37819899
+lamp安装Zabbix：https://www.centos.bz/2017/11/centos-7%E5%AE%89%E8%A3%85zabbix-3-4/
+centos下的lnmp环境安装Zabbix：https://www.cnblogs.com/zhnhelloworld/p/5864788.html
+Zabbix错误配置修改：https://www.cnblogs.com/rusking/p/4441362.html
+
+CentOS的MySQL安装：https://www.cnblogs.com/silentdoer/articles/7258232.html
+MySQL集群部署：https://www.cnblogs.com/liangyihui/p/5886799.html
+Maven安装：https://www.cnblogs.com/bincoding/p/6156236.html
+mongoDB安装：https://blog.csdn.net/junshangshui/article/details/79371316
+错误处理：https://blog.csdn.net/liuruiqun/article/details/50953298
+Jekins持续集成：https://blog.csdn.net/it_lihongmin/article/details/80814384
+
+
+Centos安装Python3：https://www.centos.bz/2018/01/%E5%9C%A8centos%E4%B8%8A%E5%AE%89%E8%A3%85python3%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/
+Oracle数据同步：https://blog.csdn.net/qq_26334813/article/details/80503973
+阿里（愚公）Oracle迁移数据库的开源项目：https://blog.csdn.net/tangxingiloveyou/article/details/79075772
+MySQL高可用性之Keepalived+Mysql（双主热备）：
+http://blog.51cto.com/lizhenliang/1362313
+ 
+学习笔记：
+Nginx是事件驱动模型（epoll）有master进程，管理worker进程，底下是workers子进程，事件处理机制采用“异步非阻塞”，进程循环处理多个事件，无需为一个请求开辟独立的线程。Nginx比Apache更加适合IO密集型请求。基本：定时器，信号，事件。Apache切换线程上下文的开销很大，创建线程造成的内存消耗大。Nginx驱动的本质是异步IO事件，在多个IO句柄快速切换。Nginx负载能力好，支持上万个http连接。
+ 
+Apache比Nginx合适的场合：Rewrite操作比较多
+ 
+Tomcat调优方案：1，启动NIO模式：Connector节点的protocol为“org.apache.coyote.http11.Http11NioProtocol”;2，线程池执行器优化；3，禁用AJP连接器；4，使用Ajp协议的性能优于HTTP
+ 
+ 
+监控：1，主动监控：程序里面埋点，将当前服务运行状态发送上传；2，被动监控，从外部建立探针和建立监控系统；
+ 
+Tomcat标签：Server（JVM），Service(关联连接器和引擎)，Connector，Engine（Servlet引擎），Host，Context（路径别名），value
+ 
+Tomcat配置：maxThread(最大支持并发连接数)；acceptcount（等待队列的最大长度）
+ 
+Tomcat中最顶层的容器是Server，一个Server可以包含至少一个Service，Service包含Connector和Container，一个Service只有一个Container，有多个Connector；Connector是将请求封装成Request和Response的；Container用于封装和管理Servlet，以及具体处理Request请求。Connector底层采用socket，需要实现TCP/IP和HTTP协议，ProtocolHandler处理请求（Endpoint、Processor、Adapter）
+ 
+Jetty默认采用NIO处理请求，处理静态资源比Tomcat要好，Jetty可以同时处理大量连接并且可以长时间保持连接；当链接周期短，或是少数非常繁忙的链接，Tomcat总体性能更好
+ 
+Daemon是Linux的“守护进程”，一般的进程在关闭终端就会停止运行，然而守护进程会继续运行，查看进程的命令“ps axj”，tty显示“？”，TPGID=-1
+ 
+free -m 的Cache是文件系统的cache；buffer是是块设备的读写缓冲区
+ 
+ln -s多个目录项指向同一个inode号，文件数据block不变；mv操作inode和block发生变化
+ 
+Keeplive保持服务器和客户端链接，避免了出现后续请求，需要重新建立连接
+ 
+tcp_tw_recycle表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭
+ 
+tcp_tw_reuse表示开启重用。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭
+ 
+Shell中打印$0输出进程名字；$$输出进程PID；$?输出上一个指令的返回值
+ 
+netstat -an | awk /^tcp/ 列出当前tcp状态
+ 
+数据库表设计三大范式：
+1，确保每一列都是独立的，意思相近的要合并
+2，每行数据只做1件事情，避免数据冗余
+3，每个列只和主键有直接关系，列与列之间不能存在传递关系
+ 
+MySQL数据库优化：
+1，在常用于where和order的字段建立索引，必要时创建复合索引（语句：）
+2，创建表要有非空默认值
+3，
+
+
+Django命令（pip install django）：
+教程：https://code.ziqiangxuetang.com/django/django-tutorial.html
+
+django-admin.py startproject HelloWorld 
+python manage.py startapp learn # 创建learn的app
+python36 manage.py runserver 127.0.0.1:8000 #重启django服务器
+
+import django 
+django.VERSION  #查看版本
+
+Flask（pip install flask）:
+教程1：http://docs.jinkan.org/docs/flask/
+教程2：http://www.pythondoc.com/flask-mega-tutorial/index.html
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello World!'
+
+@app.route('/appmy')
+def appmy():
+    return 'appmy'
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+MongoDB命令：
+#创建数据库：use 数据库名
+#插入数据： db.数据库名（文档名）.insert({"name":"菜鸟教程"})
+
+
+

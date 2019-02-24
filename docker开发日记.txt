@@ -1,0 +1,44 @@
+﻿启动docker服务：systemctl start docker
+
+查看所有docker镜像：docker images
+
+查看“运行的”docker容器：docker ps
+
+查看所有容器：docker ps -a
+
+启动尚未运行的容器：docker start 4cff2b5f5202
+
+进入容器命令行：docker exec -it 4cff2b5f5202 /bin/bash
+
+查容器id：docker inspect -f '{{.ID}}' NAMES名字
+
+复制本地文件到容器：docker cp 本地路径 容器长ID:容器路径
+
+复制容器文件到本地：docker cp 容器长ID:容器路径 本地路径
+
+Docker学习笔记：https://www.cnblogs.com/chunguang/category/851054.html
+
+docker run --name cluster1 -p 5454:5432 -e POSTGRES_PASSWORD=postgres -d postgres
+
+docker start edc6af12cd3f
+docker exec -it edc6af12cd3f /bin/bash
+
+docker inspect 9afb0de65687 | grep IPAddress
+
+docker search showdoc
+
+docker pull star7th/showdoc
+
+
+1,docker安装postgresql（端口：5432）：https://www.cnblogs.com/cxy486/p/5141111.html
+
+2,docker安装weblogic（端口：7001）：https://blog.csdn.net/bbwangj/article/details/82180279
+(java -cp /u01/oracle/weblogic/wlserver/server/lib/weblogic.jar weblogic.security.utils.AdminAccount new Admin new a12345678 security)
+
+3,docker安装oracle 11g（端口：1521）(source ~/.bash_profile )：https://www.cnblogs.com/MrXiaoAndDong/p/docker_oracle.html
+
+4,docker安装Nginx+php+MySQL：https://notemi.cn/docker-quickly-set-up-php-nginx-mysql-environment.html
+
+5,docker安装showdoc：https://blog.csdn.net/duzilonglove/article/details/789808516
+
+6,docker安装禅道：https://www.zentao.net/book/zentaopmshelp/303.html
