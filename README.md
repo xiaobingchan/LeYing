@@ -1,8 +1,4 @@
-开发环境：
-1. PyCharm 2018.2.3 (Professional Edition)
-2. Python 3.5.2
-3. TensorFlow
-4. numpy,sklearn,pandas,matlibplot...etc
+
 
 ---
 
