@@ -49,6 +49,9 @@ https://github.com/imhuay/Algorithm_Interview_Notes-Chinese
 >人工智能-机器学习笔试面试题解析
 https://github.com/geekcircle/machine-learning-interview-qa
 
+>《统计学习方法》
+课件下载：https://pan.baidu.com/s/1nzE4zkNiQM7QgHib60OTPA 提取码：ofmw
+
 ------
 
 ## 什么是 Markdown
